@@ -6,3 +6,8 @@ header {
   display:flex;
   align-items:center;
 }
+
+.search-buttons{
+  display:flex;
+  justify-content:center;
+}
