@@ -16,7 +16,10 @@
   </header>
   <main>
     <div class="column-full search-buttons">
-      <input type="text" name="pokemon-search">
+      <form id="search-pokemon">
+        <input type="text" name="name" id="name" required><br />
+        <button class="button" id="name-button" type="submit">Find Pokemon by Name/ID</button>
+       </form>
     </div>
   </main>
   <script src="js/data.js"></script>
