@@ -1,6 +1,5 @@
 /* global data */
 var searchForm = document.querySelector('#search-pokemon')
-var something1 = null;
 
 
 function getPokeData(name){
@@ -12,25 +11,15 @@ function getPokeData(name){
     data.currentPokemon = xhr.response
     var pokemon = xhr.response;
     console.log(xhr.response);
-    console.log('this is for pokemon', pokemon);
-    console.log('pokemon name:', pokemon.name);
-    something1 = data.currentPokemon.sprites.other["official-artwork"].front_default;
-    console.log(something1);
+    data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
+    generatePokemon(data);
 // THIS NEEDS TO BE UPDATED WITH A MODAL. WHEN THERE IS NO POKEMON THAT EXIST
     if(xhr.response === null){
       console.log('this fired');
     }
 
   })
-  xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/'+name);
-  xhr2.responseType = 'json';
-  xhr.addEventListener('load', function(){
-    var flavortext = xhr2.response;
-    data.flavorText = flavortext;
-    console.log(data.flavorText);
-  });
   xhr.send();
-  xhr2.send();
 }
 
 function submitForm() {
@@ -52,7 +41,7 @@ function generatePokemon(object){
 
   var pokeImg = document.createElement('img');
   pokeImg.setAttribute('class', 'poke-img');
-  pokeImg.setAttribute('src', something1);
+  pokeImg.setAttribute('src', data.pokesnap);
 
   var div2 = document.createElement('div');
   div2.setAttribute('class', 'column-half poke-text');
@@ -65,13 +54,13 @@ function generatePokemon(object){
   $name.textContent = object.currentPokemon.name;
 
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: '+object.currentPokemon.types[0].type.name;
+  $type.textContent = 'Type: '+object.currentPokemon.types[0].type.name[0];
 
   var $number = document.createElement('h4');
   $number.textContent = '#' + object.currentPokemon.id;
 
   var $weight = document.createElement('h4');
-  $weight.textContent = object.currentPokemon.weight;
+  $weight.textContent = 'Weight: ' + object.currentPokemon.weight;
 
   var abilityDiv = document.createElement('div');
   abilityDiv.setAttribute('class', 'pokemon-description')

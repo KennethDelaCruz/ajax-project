@@ -2,4 +2,5 @@
 var data = {
   currentPokemon: null,
   flavorText: null,
+  pokesnap: null,
 }
