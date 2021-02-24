@@ -91,7 +91,7 @@ function generatePokemon(object){
   $number.textContent = '#' + object.currentPokemon.id;
 
   var $weight = document.createElement('h4');
-  $weight.textContent = 'Weight: ' + object.currentPokemon.weight * .1 + 'kg' ;
+  $weight.textContent = 'Weight: ' + Math.floor(object.currentPokemon.weight * .1) + 'kg' ;
 
   var abilityDiv = document.createElement('div');
   abilityDiv.setAttribute('class', 'pokemon-description')
