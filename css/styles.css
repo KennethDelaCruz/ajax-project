@@ -56,10 +56,12 @@ form {
   align-items:center;
   width:300px;
   margin-top:50px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .poke-img {
-  max-width:70%;
+  max-width:90%;
   border: 5px solid black;
   border-radius:5px;
   ;
