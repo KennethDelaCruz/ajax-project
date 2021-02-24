@@ -1,5 +1,28 @@
 /* global data */
-var searchForm = document.querySelector('#search-pokemon')
+var searchForm = document.querySelector('#search-pokemon');
+var selectedPokmeon = document.querySelector('#selected-pokemon')
+
+function capital(word){
+  if (typeof word !== 'string'){
+    return
+  }
+  return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
+function removeZero(integer){
+  var integer = [];
+  var string = integer.toString;
+
+  console.log(string);
+
+  for (var i = 0 ; i < string.length - 1; i++){
+    integer.push(string.charAt(i));
+  }
+  integer.join('');
+  console.log(integer);
+
+}
+
 
 
 function getPokeData(name){
@@ -33,8 +56,13 @@ function submitForm() {
 }
 
 function generatePokemon(object){
+  if (document.querySelector('#selected-pokemon') !== null){
+    document.querySelector('#selected-pokemon').remove();
+  }
+
   var mainDiv = document.createElement('div');
-  mainDiv.setAttribute('class', 'selected-pokemon row');
+  mainDiv.setAttribute('class', ' row');
+  mainDiv.setAttribute('id', 'selected-pokemon')
 
   var div1 = document.createElement('div');
   div1.setAttribute('class', 'column-half poke-picture');
@@ -51,16 +79,17 @@ function generatePokemon(object){
 
   var $name = document.createElement('h3');
   $name.setAttribute('class', 'pokemon-name');
-  $name.textContent = object.currentPokemon.name;
+  $name.textContent = capital(object.currentPokemon.name);
 
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: '+object.currentPokemon.types[0].type.name[0];
+  $type.textContent = 'Type: '+ capital(object.currentPokemon.types[0].type.name);
+
 
   var $number = document.createElement('h4');
   $number.textContent = '#' + object.currentPokemon.id;
 
   var $weight = document.createElement('h4');
-  $weight.textContent = 'Weight: ' + object.currentPokemon.weight;
+  $weight.textContent = 'Weight: ' + object.currentPokemon.weight * .1 + 'kg' ;
 
   var abilityDiv = document.createElement('div');
   abilityDiv.setAttribute('class', 'pokemon-description')
@@ -75,7 +104,7 @@ function generatePokemon(object){
   var abilities = object.currentPokemon.abilities;
   for(var i = 0; i < abilities.length; i++){
     var newLi = document.createElement('li');
-    newLi.textContent = abilities[i]["ability"].name;
+    newLi.textContent = capital(abilities[i]["ability"].name);
     $list.appendChild(newLi);
   }
 
