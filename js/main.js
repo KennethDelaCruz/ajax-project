@@ -9,11 +9,13 @@ function getPokeData(name){
   xhr.addEventListener('load', function(){
     data.currentPokemon = xhr.response
     var pokemon = xhr.response;
-    console.log(xhr.response)
+    console.log(xhr.response);
+    console.log('this is for pokemon', pokemon);
+    console.log('pokemon name:', pokemon.name);
+// THIS NEEDS TO BE UPDATED WITH A MODAL. WHEN THERE IS NO POKEMON THAT EXIST
     if(xhr.response === null){
       console.log('this fired');
     }
-    console.log(pokemon.name)
 
   })
   xhr.send();
@@ -28,5 +30,7 @@ function submitForm() {
   getPokeData(name);
   searchForm.reset();
 }
+
+ //
 
 searchForm.addEventListener('submit', submitForm);

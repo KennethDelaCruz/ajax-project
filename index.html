@@ -10,17 +10,31 @@
 </head>
 <body>
   <header>
-    <div class="column-full">
+    <div class="column-full container">
       <img src="https://fontmeme.com/temporary/76eae46c18c502ffafb661c45f90729b.png">
     </div>
   </header>
-  <main>
-    <div class="column-full search-buttons">
+  <main class="container">
+    <section class="row pokemon-section">
+      <div class="column-half poke-picture">
+        <img class="poke-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/27.png">
+      </div>
+      <div class="column-half poke-text">
+        <div class="pokemon-details">
+          <h3 class="pokemon-name">Sandshrew</h3>
+          <h4>Type: Ground</h4>
+          <h4>#027</h4>
+          <h4>Weight: 12.kg</h4>
+        </div>
+        <p class="pokemon-description">Burrows deep underground in arid locations far from water. It only emerges to hunt for food.</p>
+      </div>
+    </section>
+    <section class="column-full search-buttons">
       <form id="search-pokemon">
         <input type="text" name="name" id="name" required><br />
         <button class="button" id="name-button" type="submit">Find Pokemon by Name/ID</button>
        </form>
-    </div>
+    </section>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
