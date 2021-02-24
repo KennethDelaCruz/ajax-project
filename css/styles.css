@@ -73,33 +73,46 @@ form {
 .pokemon-details {
   display:flex;
   flex-wrap:wrap;
-  align-items:flex-start
+  align-items:flex-start;
+  width:100%;
 }
 
-.pokemon-details > h3,
-.pokemon-details > h4,
-.pokemon-description{
-  text-align:center;
 
-}
+
 
 .pokemon-details > h3 {
   font-size:36px;
   width:100%;
   height:auto;
-  margin: 5px 0 20px 0;
+  margin: 5px 0 5px 0;
+  text-align:center;
 }
 
 .pokemon-details > h4 {
   font-size: 26px;
   width: calc(99% / 3);
   margin:0;
+  text-align:center;
 }
+
+
 
 .pokemon-description {
   width:100%;
   font-size:22px;
   border: 3px solid black;
   padding:10px;
+
+}
+
+ul{
+  columns:2;
+  margin-top:3px;
+}
+
+.pokemon-description > p {
+  margin:0;
+  font-weight:bold;
+  text-align:center;
 
 }
