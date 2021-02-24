@@ -1,6 +1,7 @@
 /* global data */
 var searchForm = document.querySelector('#search-pokemon');
 var selectedPokmeon = document.querySelector('#selected-pokemon')
+var pokeSection = document.querySelector('.pokemon-section');
 
 function capital(word){
   if (typeof word !== 'string'){
@@ -35,7 +36,8 @@ function getPokeData(name){
     var pokemon = xhr.response;
     console.log(xhr.response);
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
-    generatePokemon(data);
+    var newElement = generatePokemon(data);
+    pokeSection.appendChild(newElement);
 // THIS NEEDS TO BE UPDATED WITH A MODAL. WHEN THERE IS NO POKEMON THAT EXIST
     if(xhr.response === null){
       console.log('this fired');
@@ -121,25 +123,9 @@ function generatePokemon(object){
   mainDiv.appendChild(div1);
   mainDiv.appendChild(div2);
 
-  var test1  = document.querySelector('.pokemon-section')
-  test1.appendChild(mainDiv);
+return mainDiv
 }
 
-// <div class="selected-pokemon">
-//  <div class="column-half poke-picture">
-//    <img class="poke-img" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/27.png">
-//  </div>
-//  <div class="column-half poke-text">
-//    <div class="pokemon-details">
-//      <h3 class="pokemon-name">Sandshrew</h3>
-//      <h4>Type: Ground</h4>
-//      <h4>#027</h4>
-//      <h4>Weight: 12.kg</h4>
-//      </div>
-//      <p class="pokemon-description">Burrows deep underground in arid locations far from water. It only emerges to hunt for food.</p>
-//    </div>
-// </div>
-//
 
 searchForm.addEventListener('submit', submitForm);
 
