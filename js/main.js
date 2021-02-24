@@ -4,6 +4,7 @@ var searchForm = document.querySelector('#search-pokemon')
 
 function getPokeData(name){
   var xhr = new XMLHttpRequest();
+  var xhr2 = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function(){
@@ -18,7 +19,15 @@ function getPokeData(name){
     }
 
   })
+  xhr2.open('GET', 'https://pokeapi.co/api/v2/pokemon-species/'+name);
+  xhr2.responseType = 'json';
+  xhr.addEventListener('load', function(){
+    var flavortext = xhr2.response;
+    data.flavorText = flavortext;
+    console.log(data.flavorText);
+  });
   xhr.send();
+  xhr2.send();
 }
 
 function submitForm() {
@@ -60,7 +69,7 @@ function generatePokemon(object){
 
   var $description = document.createElement('p');
   $description.setAttribute('class', 'pokemon-description')
-  $description =
+
 
 }
 
