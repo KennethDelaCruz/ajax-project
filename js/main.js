@@ -1,11 +1,20 @@
+/* global data */
 var searchForm = document.querySelector('#search-pokemon')
+
 
 function getPokeData(name){
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name);
   xhr.responseType = 'json';
-  xhr.addEventListener('load', function() {
+  xhr.addEventListener('load', function(){
+    data.currentPokemon = xhr.response
+    var pokemon = xhr.response;
     console.log(xhr.response)
+    if(xhr.response === null){
+      console.log('this fired');
+    }
+    console.log(pokemon.name)
+
   })
   xhr.send();
 }
@@ -16,8 +25,7 @@ function submitForm() {
   if(typeof name === 'string') {
     name = name.toLowerCase();
   }
-  var pokemon = getPokeData(name);
-  console.log(pokemon)
+  getPokeData(name);
   searchForm.reset();
 }
 
