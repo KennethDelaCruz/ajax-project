@@ -2,6 +2,7 @@
 var searchForm = document.querySelector('#search-pokemon');
 var selectedPokmeon = document.querySelector('#selected-pokemon')
 var pokeSection = document.querySelector('.pokemon-section');
+var randomButton = document.querySelector('#random-button');
 
 function capital(word){
   if (typeof word !== 'string'){
@@ -9,22 +10,6 @@ function capital(word){
   }
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
-
-function removeZero(integer){
-  var integer = [];
-  var string = integer.toString;
-
-  console.log(string);
-
-  for (var i = 0 ; i < string.length - 1; i++){
-    integer.push(string.charAt(i));
-  }
-  integer.join('');
-  console.log(integer);
-
-}
-
-
 
 function getPokeData(name){
   var xhr = new XMLHttpRequest();
@@ -34,7 +19,6 @@ function getPokeData(name){
   xhr.addEventListener('load', function(){
     data.currentPokemon = xhr.response
     var pokemon = xhr.response;
-    console.log(xhr.response);
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
     var newElement = generatePokemon(data);
     pokeSection.appendChild(newElement);
@@ -126,7 +110,11 @@ function generatePokemon(object){
 return mainDiv
 }
 
-
-searchForm.addEventListener('submit', submitForm);
-
+function random(event){
+  var max = 898;
+  var randomInteger = Math.floor(Math.random() * Math.floor(max));
+  getPokeData(randomInteger);
 }
+
+randomButton.addEventListener('click', random );
+searchForm.addEventListener('submit', submitForm);

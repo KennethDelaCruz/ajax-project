@@ -1,3 +1,7 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
 .column-half{
   display:flex;
   justify-content:center;
@@ -25,7 +29,10 @@ header {
 
 .search-buttons{
   display:flex;
+  flex-direction:column;
   justify-content:center;
+  flex-wrap:wrap;
+
 }
 
 .button,
@@ -40,6 +47,16 @@ input,
   width: 200px;
   height: 70px;
   margin: 10px 0;
+  font-family: 'Poppins', sans-serif;
+  font-size:20px;
+}
+
+.button:active {
+  transform: translateY(.1rem) translateX(.1rem);
+}
+
+#random-button{
+  margin:auto;
 }
 
 input {
@@ -83,7 +100,7 @@ form {
 
 
 .pokemon-details > h3 {
-  font-size:36px;
+  font-size:38px;
   width:100%;
   height:auto;
   margin: 5px 0 5px 0;
@@ -91,7 +108,7 @@ form {
 }
 
 .pokemon-details > h4 {
-  font-size: 26px;
+  font-size: 20px;
   width: calc(99% / 3);
   margin:0;
   text-align:center;
@@ -101,7 +118,7 @@ form {
 
 .pokemon-description {
   width:100%;
-  font-size:22px;
+  font-size:18px;
   border: 3px solid black;
   padding:10px;
 
