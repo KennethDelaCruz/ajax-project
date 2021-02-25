@@ -11,22 +11,6 @@ function capital(word){
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-function removeZero(integer){
-  var integer = [];
-  var string = integer.toString;
-
-  console.log(string);
-
-  for (var i = 0 ; i < string.length - 1; i++){
-    integer.push(string.charAt(i));
-  }
-  integer.join('');
-  console.log(integer);
-
-}
-
-
-
 function getPokeData(name){
   var xhr = new XMLHttpRequest();
   var xhr2 = new XMLHttpRequest();
@@ -35,7 +19,6 @@ function getPokeData(name){
   xhr.addEventListener('load', function(){
     data.currentPokemon = xhr.response
     var pokemon = xhr.response;
-    console.log(xhr.response);
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
     var newElement = generatePokemon(data);
     pokeSection.appendChild(newElement);
