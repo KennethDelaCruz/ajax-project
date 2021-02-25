@@ -67,10 +67,10 @@ function generatePokemon(object){
 
   var $name = document.createElement('h3');
   $name.setAttribute('class', 'pokemon-name');
-  $name.textContent = capital(object.currentPokemon.name) +' ';
+  $name.textContent = capital(object.currentPokemon.name);
 
   var $heart = document.createElement('i')
-  if(data.favorites.includes(object.currentPokemon.name)){
+  if(data.favorites.includes(object.currentPokemon.name )){
     $heart.setAttribute('class', 'fas fa-heart')
   } else {
     $heart.setAttribute('class', 'far fa-heart');
@@ -128,9 +128,19 @@ function random(event){
 }
 
 function likeButton(event){
-if(event.target.id === 'like'){
-  console.log(event.target);
-}
+  var $name = event.target.closest('h3').textContent.toLowerCase();
+  if(event.target.id === 'like'){
+    if(data.favorites.includes($name)){
+      event.target.setAttribute('class', 'far fa-heart')
+      var index = data.favorites.indexOf($name)
+      data.favorites.splice(index);
+      console.log(data.favorites);
+    } else {
+    event.target.setAttribute('class', 'fas fa-heart')
+    data.favorites.push($name);
+    console.log(data.favorites);
+    }
+  }
 }
 
 pokeSection.addEventListener('click', likeButton);
