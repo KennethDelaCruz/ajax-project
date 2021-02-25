@@ -67,14 +67,18 @@ function generatePokemon(object){
 
   var $name = document.createElement('h3');
   $name.setAttribute('class', 'pokemon-name');
-  $name.textContent = capital(object.currentPokemon.name);
+  $name.textContent = capital(object.currentPokemon.name) +' ';
 
   var $heart = document.createElement('i')
-  $heart.setAttribute('class', 'far fa-heart');
+  if(data.favorites.includes(object.currentPokemon.name)){
+    $heart.setAttribute('class', 'fas fa-heart')
+  } else {
+    $heart.setAttribute('class', 'far fa-heart');
+  }
   $heart.setAttribute('id', 'like');
 
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: '+ capital(object.currentPokemon.types[0].type.name + '   ');
+  $type.textContent = 'Type: '+ capital(object.currentPokemon.types[0].type.name);
 
 
   var $number = document.createElement('h4');
