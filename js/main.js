@@ -129,11 +129,4 @@ return mainDiv
 
 searchForm.addEventListener('submit', submitForm);
 
-function test1(object){
-  var abilities = object.currentPokemon.abilities;
-  console.log(abilities)
-  for (var i = 0; i < abilities.length; i++) {
-    console.log(abilities[i]["ability"].name)
-  }
-
 }
