@@ -130,8 +130,7 @@ return mainDiv
 function random(event){
   var max = 898;
   var randomInteger = Math.floor(Math.random() * Math.floor(max));
-  console.log(randomInteger);
-
+  getPokeData(randomInteger);
 }
 
 randomButton.addEventListener('click', random );
