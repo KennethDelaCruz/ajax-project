@@ -2,6 +2,7 @@
 var searchForm = document.querySelector('#search-pokemon');
 var selectedPokmeon = document.querySelector('#selected-pokemon')
 var pokeSection = document.querySelector('.pokemon-section');
+var randomButton = document.querySelector('#random-button');
 
 function capital(word){
   if (typeof word !== 'string'){
@@ -126,7 +127,12 @@ function generatePokemon(object){
 return mainDiv
 }
 
-
-searchForm.addEventListener('submit', submitForm);
+function random(event){
+  var max = 898;
+  var randomInteger = Math.floor(Math.random() * Math.floor(max));
+  console.log(randomInteger);
 
 }
+
+randomButton.addEventListener('click', random );
+searchForm.addEventListener('submit', submitForm);
