@@ -3,6 +3,8 @@ var searchForm = document.querySelector('#search-pokemon');
 var selectedPokmeon = document.querySelector('#selected-pokemon')
 var pokeSection = document.querySelector('.pokemon-section');
 var randomButton = document.querySelector('#random-button');
+var heartButton = document.querySelector('.fa-heart');
+var pokeSection = document.querySelector('.pokemon-section');
 
 function capital(word){
   if (typeof word !== 'string'){
@@ -67,8 +69,12 @@ function generatePokemon(object){
   $name.setAttribute('class', 'pokemon-name');
   $name.textContent = capital(object.currentPokemon.name);
 
+  var $heart = document.createElement('i')
+  $heart.setAttribute('class', 'far fa-heart');
+  $heart.setAttribute('id', 'like');
+
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: '+ capital(object.currentPokemon.types[0].type.name);
+  $type.textContent = 'Type: '+ capital(object.currentPokemon.types[0].type.name + '   ');
 
 
   var $number = document.createElement('h4');
@@ -95,6 +101,7 @@ function generatePokemon(object){
   }
 
 
+  $name.appendChild($heart);
   subDiv.appendChild($name);
   subDiv.appendChild($type);
   subDiv.appendChild($number);
@@ -116,5 +123,12 @@ function random(event){
   getPokeData(randomInteger);
 }
 
-randomButton.addEventListener('click', random );
+function likeButton(event){
+if(event.target.id === 'like'){
+  console.log(event.target);
+}
+}
+
+pokeSection.addEventListener('click', likeButton);
+randomButton.addEventListener('click', random);
 searchForm.addEventListener('submit', submitForm);
