@@ -5,6 +5,17 @@ var randomButton = document.querySelector('#random-button');
 var heartButton = document.querySelector('.fa-heart');
 var favoriteButton = document.querySelector('#favorite-button');
 var favoriteList = document.querySelector('.favorite-list')
+var allSections = document.querySelectorAll('section');
+
+
+window.addEventListener('load',function(){
+  if(data.currentPokemon !== null){
+    var open = generatePokemon(data.currentPokemon);
+    pokeSection.appendChild(open);
+  }
+  allSections.forEach(hideSection);
+})
+
 
 function capital(word){
   if (typeof word !== 'string'){
@@ -23,7 +34,7 @@ function getPokeData(name){
     data.currentPokemon = xhr.response
     var pokemon = xhr.response;
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
-    var newElement = generatePokemon(data);
+    var newElement = generatePokemon(pokemon);
     pokeSection.appendChild(newElement);
 // THIS NEEDS TO BE UPDATED WITH A MODAL. WHEN THERE IS NO POKEMON THAT EXIST
     if(xhr.response === null){
@@ -49,6 +60,7 @@ function getFavorites(name){
 function submitForm() {
   event.preventDefault();
   data.view = "selected";
+  allSections.forEach(hideSection);
   var name = searchForm.name.value;
   if(typeof name === 'string') {
     name = name.toLowerCase();
@@ -81,10 +93,10 @@ function generatePokemon(object){
 
   var $name = document.createElement('h3');
   $name.setAttribute('class', 'pokemon-name');
-  $name.textContent = capital(object.currentPokemon.name);
+  $name.textContent = capital(object.name);
 
   var $heart = document.createElement('i')
-  if(data.favorites.includes(object.currentPokemon.name )){
+  if(data.favorites.includes(object.name )){
     $heart.setAttribute('class', 'fas fa-heart')
   } else {
     $heart.setAttribute('class', 'far fa-heart');
@@ -92,14 +104,14 @@ function generatePokemon(object){
   $heart.setAttribute('id', 'like');
 
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: '+ capital(object.currentPokemon.types[0].type.name);
+  $type.textContent = 'Type: '+ capital(object.types[0].type.name);
 
 
   var $number = document.createElement('h4');
-  $number.textContent = '#' + object.currentPokemon.id;
+  $number.textContent = '#' + object.id;
 
   var $weight = document.createElement('h4');
-  $weight.textContent = 'Weight: ' + Math.floor(object.currentPokemon.weight * .1) + 'kg' ;
+  $weight.textContent = 'Weight: ' + Math.floor(object.weight * .1) + 'kg' ;
 
   var abilityDiv = document.createElement('div');
   abilityDiv.setAttribute('class', 'pokemon-description')
@@ -111,7 +123,7 @@ function generatePokemon(object){
 
 
 
-  var abilities = object.currentPokemon.abilities;
+  var abilities = object.abilities;
   for(var i = 0; i < abilities.length; i++){
     var newLi = document.createElement('li');
     newLi.textContent = capital(abilities[i]["ability"].name);
@@ -157,14 +169,16 @@ function generateFavorites(object){
 
 function random(event){
   data.view = "selected";
+  allSections.forEach(hideSection);
   var max = 898;
   var randomInteger = Math.floor(Math.random() * Math.floor(max));
   getPokeData(randomInteger);
 }
 
 function likeButton(event){
-  var $name = event.target.closest('h3').textContent.toLowerCase();
+
   if(event.target.id === 'like'){
+    var $name = event.target.closest('h3').textContent.toLowerCase();
     if(data.favorites.includes($name)){
       event.target.setAttribute('class', 'far fa-heart')
       var index = data.favorites.indexOf($name)
@@ -180,15 +194,24 @@ function likeButton(event){
 
 function favList(event){
   data.view ='favorites'
+  allSections.forEach(hideSection);
   if(data.favorites.length !== 0){
     var allListed = document.querySelectorAll('.fav-list')
-    console.log(allListed)
     for (var k = 0; k < allListed.length; k++){
-      allListed.remove();
+      allListed[k].remove();
     }
   }
   for(var i = 0; i < data.favorites.length; i++){
     getFavorites(data.favorites[i]);
+  }
+}
+
+function hideSection(object){
+  var viewType = object.getAttribute('data-view');
+  if(viewType !== data.view){
+    object.classList.add('hidden');
+  } else {
+    object.classList.remove('hidden')
   }
 }
 
