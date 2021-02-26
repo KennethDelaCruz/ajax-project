@@ -147,3 +147,27 @@ ul{
 .fa-heart {
   margin-left:10px;
 }
+
+
+.favorite-list{
+  columns:1;
+}
+
+.favorite-list > li {
+  background-color:lightgrey;
+  border:3px solid black;
+  transform:scale(1);
+  transition: transform 0.5s
+}
+
+li:hover{
+  background-color:green;
+  transform:scale(1.025);
+}
+
+li > img {
+  height:60px;
+  width:60px;
+  overflow:hidden;
+  padding:-20px;
+}
