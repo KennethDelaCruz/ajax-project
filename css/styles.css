@@ -2,6 +2,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.hidden {
+  display:none !important;
+}
+
 .column-half{
   display:flex;
   justify-content:center;
@@ -37,7 +41,8 @@ header {
 
 .button,
 input,
-.poke-img{
+.poke-img,
+.favorite-list > li{
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -46,17 +51,20 @@ input,
   background: rgba(203, 36, 36, 0.5);
   width: 200px;
   height: 70px;
-  margin: 10px 0;
+  margin: 5px auto;
   font-family: 'Poppins', sans-serif;
   font-size:20px;
+  transform: scale(1);
+  transition: transform .5s;
+}
+
+
+.button:hover{
+  transform:scale(1.025);
 }
 
 .button:active {
   transform: translateY(.1rem) translateX(.1rem);
-}
-
-#random-button{
-  margin:auto;
 }
 
 input {
@@ -95,9 +103,6 @@ form {
   align-items:flex-start;
   width:100%;
 }
-
-
-
 
 .pokemon-details > h3 {
   font-size:38px;
@@ -141,9 +146,45 @@ ul{
 }
 
 .fas{
-  color:red;
+  color:#CB2424;
 }
 
 .fa-heart {
   margin-left:10px;
+  transform: scale(1);
+  transition: transform .25s;
+}
+
+.fa-heart:active {
+  transform: scale(.95);
+}
+
+.favorite-list{
+  padding:10px 0px;
+  height:auto;
+}
+
+.favorite-list > li {
+  background-color:lightgrey;
+  border:3px solid black;
+  transform:scale(1);
+  transition: transform 0.5s;
+  display:flex;
+  align-content:center;
+  justify-content:space-around;
+  margin:5px 5px;
+}
+
+.fav-list:hover{
+  background-color:#618A3D;
+  transform:scale(1.025);
+}
+
+li > img {
+  height:70px;
+  width:70px;
+}
+
+.fav-heading {
+  text-align:center;
 }

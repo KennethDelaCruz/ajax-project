@@ -15,6 +15,22 @@
   width: 100%;
 }
 
+@media screen and (max-width:550px){
+  .favorite-list{
+    columns:1;
+  }
+
+  .favorite-list > li{
+    width:100%;
+  }
+}
+
+@media screen and (min-width:550px){
+
+  .favorite-list > li {
+    width: calc(95% / 2);
+  }
+}
 @media screen and (min-width: 768px) {
   .container,
   .header-nav {
@@ -29,4 +45,11 @@
   .column-half {
     width: 50%;
   }
+
+  .favorite-list > li {
+    width: calc(95% / 3)
+  }
+
+
+
 }

@@ -18,16 +18,22 @@
     </div>
   </header>
   <main class="container">
-    <section class="row pokemon-section">
+    <section class="row pokemon-section" data-view="selected">
 
     </section>
-    <section class="column-full search-buttons">
+    <section class="column-full favorite-box" data-view="favorites">
+      <h3 class="fav-heading">Favorite Pokemon!</h3>
+      <ul class="favorite-list row">
+      </ul>
+    </section>
+    <div class="column-full search-buttons">
       <form id="search-pokemon">
         <input type="text" name="name" id="name" required><br />
         <button class="button" id="name-button" type="submit">Find Pokemon by Name/ID</button>
        </form>
        <button class="button" id="random-button">Search Random Pokemon</button>
-    </section>
+       <button class="button" id="favorite-button">View Favorites</button>
+      </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
