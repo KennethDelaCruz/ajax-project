@@ -13,9 +13,10 @@ function capital(word){
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
+
+
 function getPokeData(name){
   var xhr = new XMLHttpRequest();
-  var xhr2 = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function(){
@@ -28,9 +29,18 @@ function getPokeData(name){
     if(xhr.response === null){
       console.log('this fired');
     }
-
   })
   xhr.send();
+}
+
+function getFavorites(name){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name)
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function() {
+    var pokemon = xhr.response;
+
+  })
 }
 
 function submitForm() {
@@ -120,6 +130,23 @@ function generatePokemon(object){
 
 return mainDiv
 }
+
+function generateFavorites(object){
+  var $li = document.createElement('li');
+
+  var $img = document.createElement('img');
+  $img.setAttribute('src', object.sprites.front_default)
+
+  var $name = document.createElement('h3');
+  $name.textContent = capital(object.name);
+
+//  <li>
+//    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/27.png">
+//      <h3>Sandshrew</h3>
+//      <h3>#27</h3>
+//        </li>
+}
+
 
 function random(event){
   var max = 898;

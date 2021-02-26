@@ -153,6 +153,12 @@ ul{
 
 .fa-heart {
   margin-left:10px;
+  transform: scale(1);
+  transition: transform .25s;
+}
+
+.fa-heart:active {
+  transform: scale(.95);
 }
 
 .favorite-list{
