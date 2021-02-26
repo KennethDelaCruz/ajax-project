@@ -1,10 +1,10 @@
 /* global data */
 var searchForm = document.querySelector('#search-pokemon');
-var selectedPokmeon = document.querySelector('#selected-pokemon')
 var pokeSection = document.querySelector('.pokemon-section');
 var randomButton = document.querySelector('#random-button');
 var heartButton = document.querySelector('.fa-heart');
-var pokeSection = document.querySelector('.pokemon-section');
+var favoriteButton = document.querySelector('#favorite-button');
+var favoriteList = document.querySelector('.favorite-list')
 
 function capital(word){
   if (typeof word !== 'string'){
@@ -35,16 +35,20 @@ function getPokeData(name){
 
 function getFavorites(name){
   var xhr = new XMLHttpRequest();
+  console.log(name);
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name)
   xhr.responseType = 'json';
-  xhr.addEventListener('load', function() {
+  xhr.addEventListener('load', function(){
     var pokemon = xhr.response;
-
+    var newLi = generateFavorites(pokemon);
+    favoriteList.appendChild(newLi);
   })
-}
+  xhr.send();
+};
 
 function submitForm() {
   event.preventDefault();
+  data.view = "selected";
   var name = searchForm.name.value;
   if(typeof name === 'string') {
     name = name.toLowerCase();
@@ -133,6 +137,7 @@ return mainDiv
 
 function generateFavorites(object){
   var $li = document.createElement('li');
+  $li.setAttribute('class', 'fav-list')
 
   var $img = document.createElement('img');
   $img.setAttribute('src', object.sprites.front_default)
@@ -140,15 +145,18 @@ function generateFavorites(object){
   var $name = document.createElement('h3');
   $name.textContent = capital(object.name);
 
-//  <li>
-//    <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/27.png">
-//      <h3>Sandshrew</h3>
-//      <h3>#27</h3>
-//        </li>
+  var $number = document.createElement('h3');
+  $number.textContent = '#' + object.id;
+
+  $li.appendChild($img);
+  $li.appendChild($name);
+  $li.appendChild($number);
+  return $li
 }
 
 
 function random(event){
+  data.view = "selected";
   var max = 898;
   var randomInteger = Math.floor(Math.random() * Math.floor(max));
   getPokeData(randomInteger);
@@ -170,6 +178,21 @@ function likeButton(event){
   }
 }
 
+function favList(event){
+  data.view ='favorites'
+  if(data.favorites.length !== 0){
+    var allListed = document.querySelectorAll('.fav-list')
+    console.log(allListed)
+    for (var k = 0; k < allListed.length; k++){
+      allListed.remove();
+    }
+  }
+  for(var i = 0; i < data.favorites.length; i++){
+    getFavorites(data.favorites[i]);
+  }
+}
+
+favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);
 searchForm.addEventListener('submit', submitForm);
