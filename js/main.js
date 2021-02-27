@@ -160,11 +160,17 @@ function generateFavorites(object){
   var $number = document.createElement('h3');
   $number.textContent = '#' + object.id;
 
+  var $remove = document.createElement('i');
+  $remove.setAttribute('class', 'fas fa-times');
+
   $li.appendChild($img);
   $li.appendChild($name);
   $li.appendChild($number);
+  $li.appendChild($remove);
   return $li
 }
+
+//<i class="fas fa-times"></i>
 
 
 function random(event){
