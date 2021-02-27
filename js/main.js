@@ -36,17 +36,12 @@ function getPokeData(name){
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
     var newElement = generatePokemon(pokemon);
     pokeSection.appendChild(newElement);
-// THIS NEEDS TO BE UPDATED WITH A MODAL. WHEN THERE IS NO POKEMON THAT EXIST
-    if(xhr.response === null){
-      console.log('this fired');
-    }
   })
   xhr.send();
 }
 
 function getFavorites(name){
   var xhr = new XMLHttpRequest();
-  console.log(name);
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name)
   xhr.responseType = 'json';
   xhr.addEventListener('load', function(){
@@ -189,11 +184,9 @@ function likeButton(event){
       event.target.setAttribute('class', 'far fa-heart')
       var index = data.favorites.indexOf($name)
       data.favorites.splice(index, 1);
-      console.log(data.favorites);
     } else {
     event.target.setAttribute('class', 'fas fa-heart')
     data.favorites.push($name);
-    console.log(data.favorites);
     }
   }
 }
@@ -222,13 +215,13 @@ function hideSection(object){
 }
 
 function removeFav(event){
+  var closest = event.target.closest('li')
   if(event.target.className === 'fas fa-times'){
     var $name = event.target.previousSibling.previousSibling.textContent.toLowerCase();
     if(data.favorites.includes($name)){
-      console.log('it reached here');
+      closest.remove();
       var index = data.favorites.indexOf($name);
       data.favorites.splice(index,1);
-      console.log(data.favorites);
     }
   }
 }
