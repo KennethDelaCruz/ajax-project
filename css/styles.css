@@ -170,7 +170,7 @@ ul{
   transform:scale(1);
   transition: transform 0.5s;
   display:flex;
-  align-content:center;
+  align-items:center;
   justify-content:space-around;
   margin:5px 5px;
 }
@@ -181,10 +181,17 @@ ul{
 }
 
 li > img {
-  height:70px;
-  width:70px;
+  height:60px;
+  width:60px;
 }
 
 .fav-heading {
   text-align:center;
+}
+
+.fa-times{
+ position:relative;
+ font-size:20px;
+ margin:0 10px;
+ float:right;
 }

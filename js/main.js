@@ -188,7 +188,7 @@ function likeButton(event){
     if(data.favorites.includes($name)){
       event.target.setAttribute('class', 'far fa-heart')
       var index = data.favorites.indexOf($name)
-      data.favorites.splice(index);
+      data.favorites.splice(index, 1);
       console.log(data.favorites);
     } else {
     event.target.setAttribute('class', 'fas fa-heart')
@@ -221,6 +221,19 @@ function hideSection(object){
   }
 }
 
+function removeFav(event){
+  if(event.target.className === 'fas fa-times'){
+    var $name = event.target.previousSibling.previousSibling.textContent.toLowerCase();
+    if(data.favorites.includes($name)){
+      console.log('it reached here');
+      var index = data.favorites.indexOf($name);
+      data.favorites.splice(index,1);
+      console.log(data.favorites);
+    }
+  }
+}
+
+favoriteList.addEventListener('dblclick', removeFav)
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);
