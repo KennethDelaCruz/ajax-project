@@ -36,17 +36,12 @@ function getPokeData(name){
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
     var newElement = generatePokemon(pokemon);
     pokeSection.appendChild(newElement);
-// THIS NEEDS TO BE UPDATED WITH A MODAL. WHEN THERE IS NO POKEMON THAT EXIST
-    if(xhr.response === null){
-      console.log('this fired');
-    }
   })
   xhr.send();
 }
 
 function getFavorites(name){
   var xhr = new XMLHttpRequest();
-  console.log(name);
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name)
   xhr.responseType = 'json';
   xhr.addEventListener('load', function(){
@@ -160,11 +155,17 @@ function generateFavorites(object){
   var $number = document.createElement('h3');
   $number.textContent = '#' + object.id;
 
+  var $remove = document.createElement('i');
+  $remove.setAttribute('class', 'fas fa-times');
+
   $li.appendChild($img);
   $li.appendChild($name);
   $li.appendChild($number);
+  $li.appendChild($remove);
   return $li
 }
+
+//<i class="fas fa-times"></i>
 
 
 function random(event){
@@ -182,12 +183,10 @@ function likeButton(event){
     if(data.favorites.includes($name)){
       event.target.setAttribute('class', 'far fa-heart')
       var index = data.favorites.indexOf($name)
-      data.favorites.splice(index);
-      console.log(data.favorites);
+      data.favorites.splice(index, 1);
     } else {
     event.target.setAttribute('class', 'fas fa-heart')
     data.favorites.push($name);
-    console.log(data.favorites);
     }
   }
 }
@@ -215,6 +214,19 @@ function hideSection(object){
   }
 }
 
+function removeFav(event){
+  var closest = event.target.closest('li')
+  if(event.target.className === 'fas fa-times'){
+    var $name = event.target.previousSibling.previousSibling.textContent.toLowerCase();
+    if(data.favorites.includes($name)){
+      closest.remove();
+      var index = data.favorites.indexOf($name);
+      data.favorites.splice(index,1);
+    }
+  }
+}
+
+favoriteList.addEventListener('dblclick', removeFav)
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);
