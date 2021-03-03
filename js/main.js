@@ -61,6 +61,7 @@ function submitForm() {
     name = name.toLowerCase();
   }
   getPokeData(name);
+  pokeSection.scrollIntoView({ behavior: 'smooth' });
   searchForm.reset();
 }
 
@@ -174,6 +175,7 @@ function random(event){
   var max = 898;
   var randomInteger = Math.floor(Math.random() * Math.floor(max));
   getPokeData(randomInteger);
+  pokeSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 function likeButton(event){
@@ -195,14 +197,18 @@ function favList(event){
   data.view ='favorites'
   allSections.forEach(hideSection);
   if(data.favorites.length !== 0){
+    document.querySelector('.fav-heading').textContent = 'Your Favorite Pokemon!'
     var allListed = document.querySelectorAll('.fav-list')
     for (var k = 0; k < allListed.length; k++){
       allListed[k].remove();
     }
+  } else {
+    document.querySelector('.fav-heading').textContent = 'The List is Currently Empty!';
   }
   for(var i = 0; i < data.favorites.length; i++){
     getFavorites(data.favorites[i]);
   }
+  favoriteList.scrollIntoView({behavior: 'smooth'});
 }
 
 function hideSection(object){
@@ -226,7 +232,7 @@ function removeFav(event){
   }
 }
 
-favoriteList.addEventListener('dblclick', removeFav)
+favoriteList.addEventListener('click', removeFav)
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);
