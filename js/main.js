@@ -226,7 +226,7 @@ function removeFav(event){
   }
 }
 
-favoriteList.addEventListener('dblclick', removeFav)
+favoriteList.addEventListener('click', removeFav)
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);
