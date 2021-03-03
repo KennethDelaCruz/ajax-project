@@ -6,6 +6,7 @@ var heartButton = document.querySelector('.fa-heart');
 var favoriteButton = document.querySelector('#favorite-button');
 var favoriteList = document.querySelector('.favorite-list')
 var allSections = document.querySelectorAll('section');
+var loading = document.querySelector('#loading-image');
 
 
 window.addEventListener('load',function(){
@@ -36,6 +37,7 @@ function getPokeData(name){
     data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
     var newElement = generatePokemon(pokemon);
     pokeSection.appendChild(newElement);
+    loading.classList.add('hidden');
   })
   xhr.send();
 }
@@ -60,6 +62,7 @@ function submitForm() {
   if(typeof name === 'string') {
     name = name.toLowerCase();
   }
+  loading.classList.remove('hidden');
   getPokeData(name);
   pokeSection.scrollIntoView({ behavior: 'smooth' });
   searchForm.reset();
@@ -174,6 +177,7 @@ function random(event){
   allSections.forEach(hideSection);
   var max = 898;
   var randomInteger = Math.floor(Math.random() * Math.floor(max));
+  loading.classList.remove('hidden');
   getPokeData(randomInteger);
   pokeSection.scrollIntoView({ behavior: 'smooth' });
 }

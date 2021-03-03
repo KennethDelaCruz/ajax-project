@@ -199,3 +199,12 @@ li > img {
 .fav-heading{
   font-size:25px;
 }
+
+.loader {
+  display:flex;
+}
+
+#loading-image {
+  transform: scale(.3);
+  margin:auto;
+}
