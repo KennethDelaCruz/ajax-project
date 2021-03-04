@@ -13,7 +13,7 @@ It pulls pokemon information from https://pokeapi.co/ and uses HTML5, CSS3 and J
 5) Users can remove Pokemon from their Favorite Pokemon list.
 
 ### Planned Features
-1) Users are able to search for moreinformation of their favorite pokemon by clicking the listed pokemon on their Favorites list
+1) Users are able to search for more information of their favorite pokemon by clicking the listed pokemon on their Favorites list
 2) Users are able to make a "Trainer List" of 6 pokemon that they would take on their journey
 3) Users are able to search for Pokemon based on Type.
 
