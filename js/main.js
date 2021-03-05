@@ -169,9 +169,6 @@ function generateFavorites(object){
   return $li
 }
 
-//<i class="fas fa-times"></i>
-
-
 function random(event){
   data.view = "selected";
   allSections.forEach(hideSection);
