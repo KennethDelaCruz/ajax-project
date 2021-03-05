@@ -98,13 +98,24 @@ function generatePokemon(object) {
   $heart.setAttribute('id', 'like');
 
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: ' + capital(object.types[0].type.name);
+  $type.textContent = 'Type: ';
+  $type.setAttribute('class', 'type');
+
+  var $typeName = document.createElement('h4');
+  $typeName.textContent = capital(object.types[0].type.name);
+  $typeName.setAttribute('class', 'type-name');
 
   var $number = document.createElement('h4');
   $number.textContent = '#' + object.id;
+  $number.setAttribute('class', 'poke-id');
 
   var $weight = document.createElement('h4');
-  $weight.textContent = 'Weight: ' + Math.floor(object.weight * 0.1) + 'kg';
+  $weight.textContent = 'Weight: ';
+  $weight.setAttribute('class', 'poke-weight');
+
+  var $weightNumber = document.createElement('h4');
+  $weightNumber.textContent = Math.floor(object.weight * 0.1) + 'kg';
+  $weightNumber.setAttribute('class', 'weight-number');
 
   var abilityDiv = document.createElement('div');
   abilityDiv.setAttribute('class', 'pokemon-description');
@@ -121,6 +132,8 @@ function generatePokemon(object) {
     $list.appendChild(newLi);
   }
 
+  $weight.appendChild($weightNumber);
+  $type.appendChild($typeName);
   $name.appendChild($heart);
   subDiv.appendChild($name);
   subDiv.appendChild($type);
@@ -195,7 +208,7 @@ function favList(event) {
       allListed[k].remove();
     }
   } else {
-    document.querySelector('.fav-heading').textContent = 'The List is Currently Empty!';
+    document.querySelector('.fav-heading').textContent = 'Favorite Pokémon list is Currently Empty!';
   }
   for (var i = 0; i < data.favorites.length; i++) {
     getFavorites(data.favorites[i]);
