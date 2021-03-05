@@ -3,46 +3,44 @@ body {
 }
 
 .hidden {
-  display:none !important;
+  display: none !important;
 }
 
-.column-half{
-  display:flex;
-  justify-content:center;
-  flex-wrap:wrap;
+.column-half {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .poke-picture {
-  align-items:center;
+  align-items: center;
 }
 
-
 .poke-text > p {
-  width:100%;
+  width: 100%;
 }
 
 header {
-  background-color:#CB2424;
-  width:100%;
+  background-color: #cb2424;
+  width: 100%;
   height: 90px;
   border-bottom: 20px solid black;
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   margin-bottom: 30px;
 }
 
-.search-buttons{
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  flex-wrap:wrap;
-
+.search-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
 .button,
 input,
 .poke-img,
-.favorite-list > li{
+.favorite-list > li {
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 }
@@ -53,158 +51,149 @@ input,
   height: 70px;
   margin: 5px auto;
   font-family: 'Poppins', sans-serif;
-  font-size:20px;
+  font-size: 20px;
   transform: scale(1);
-  transition: transform .5s;
+  transition: transform 0.5s;
 }
 
-
-.button:hover{
-  transform:scale(1.025);
+.button:hover {
+  transform: scale(1.025);
 }
 
 .button:active {
-  transform: translateY(.1rem) translateX(.1rem);
+  transform: translateY(0.1rem) translateX(0.1rem);
 }
 
 input {
   width: 100%;
-  height:30px;
-  border: 2px solid #000000;
+  height: 30px;
+  border: 2px solid #000;
   margin: 10px;
 }
 
 form {
-  display:flex;
+  display: flex;
   flex-wrap: wrap;
-  justify-content:center;
-  align-items:center;
-  width:300px;
-  margin-top:50px;
-  margin-left:auto;
-  margin-right:auto;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .poke-img {
-  max-width:90%;
+  max-width: 90%;
   border: 5px solid black;
-  border-radius:5px;
-  ;
+  border-radius: 5px;
 }
 
 .poke-img,
-.pokemon-description{
-    background-color:rgb(236, 236, 236);
+.pokemon-description {
+  background-color: rgb(236, 236, 236);
 }
 
 .pokemon-details {
-  display:flex;
-  flex-wrap:wrap;
-  align-items:flex-start;
-  width:100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .pokemon-details > h3 {
-  font-size:38px;
-  width:100%;
-  height:auto;
+  font-size: 38px;
+  width: 100%;
+  height: auto;
   margin: 5px 0 5px 0;
-  text-align:center;
+  text-align: center;
 }
 
 .pokemon-details > h4 {
   font-size: 20px;
   width: calc(99% / 3);
-  margin:0;
-  text-align:center;
+  margin: 0;
+  text-align: center;
 }
-
-
 
 .pokemon-description {
-  width:100%;
-  font-size:18px;
+  width: 100%;
+  font-size: 18px;
   border: 3px solid black;
-  padding:10px;
-
+  padding: 10px;
 }
 
-ul{
-  columns:2;
-  margin-top:3px;
+ul {
+  columns: 2;
+  margin-top: 3px;
 }
 
 .pokemon-description > p {
-  margin:0;
-  font-weight:bold;
-  text-align:center;
-
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
 }
 
-#selected-pokemon{
-  margin:10px;
+#selected-pokemon {
+  margin: 10px;
 }
 
-.fas{
-  color:#CB2424;
+.fas {
+  color: #cb2424;
 }
 
 .fa-heart {
-  margin-left:10px;
+  margin-left: 10px;
   transform: scale(1);
-  transition: transform .25s;
+  transition: transform 0.25s;
 }
 
 .fa-heart:active {
-  transform: scale(.95);
+  transform: scale(0.95);
 }
 
-.favorite-list{
-  padding:10px 0px;
-  height:auto;
+.favorite-list {
+  padding: 10px 0;
+  height: auto;
 }
 
 .favorite-list > li {
-  background-color:lightgrey;
-  border:3px solid black;
-  transform:scale(1);
+  background-color: lightgrey;
+  border: 3px solid black;
+  transform: scale(1);
   transition: transform 0.5s;
-  display:flex;
-  align-items:center;
-  justify-content:space-around;
-  margin:5px 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 5px 5px;
 }
 
-.fav-list:hover{
-  background-color:#618A3D;
-  transform:scale(1.025);
+.fav-list:hover {
+  background-color: #618a3d;
+  transform: scale(1.025);
 }
 
 li > img {
-  height:60px;
-  width:60px;
+  height: 60px;
+  width: 60px;
 }
 
 .fav-heading {
-  text-align:center;
+  text-align: center;
+  font-size: 25px;
 }
 
-.fa-times{
- position:relative;
- font-size:20px;
- margin:0 10px;
- float:right;
-}
-
-.fav-heading{
-  font-size:25px;
+.fa-times {
+  position: relative;
+  font-size: 20px;
+  margin: 0 10px;
+  float: right;
 }
 
 .loader {
-  display:flex;
+  display: flex;
 }
 
 #loading-image {
-  transform: scale(.3);
-  margin:auto;
+  transform: scale(0.3);
+  margin: auto;
 }
