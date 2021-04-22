@@ -163,6 +163,7 @@ function generateFavorites(object) {
 
   var $name = document.createElement('h3');
   $name.textContent = capital(object.name);
+  $name.setAttribute('class', 'favorite-name');
 
   var $number = document.createElement('h3');
   $number.textContent = '#' + object.id;
@@ -241,6 +242,15 @@ function removeFav(event) {
   }
 }
 
+function searchFav(event) {
+  if (event.target.className === 'favorite-name') {
+    var name = event.target.textContent.toLowerCase();
+    getPokeData(name.toLowerCase());
+    data.view = 'selected';
+    allSections.forEach(hideSection);
+  }
+}
+
 function homeButton(event) {
   data.view = 'home-view';
   allSections.forEach(hideSection);
@@ -262,6 +272,7 @@ window.addEventListener('load', function () {
 
 route1.addEventListener('click', homeButton);
 favoriteList.addEventListener('click', removeFav);
+favoriteList.addEventListener('click', searchFav);
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);

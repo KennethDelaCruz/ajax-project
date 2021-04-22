@@ -170,6 +170,20 @@ ul {
   transform: scale(0.95);
 }
 
+.fa-times {
+  position: relative;
+  font-size: 20px;
+  margin: 0 10px;
+  float: right;
+}
+
+.fa-heart:hover,
+.button:hover,
+.form-button:hover,
+.fa-times:hover {
+  cursor: pointer;
+}
+
 .favorite-list {
   padding: 10px 0;
   height: auto;
@@ -199,13 +213,6 @@ li > img {
 .fav-heading {
   text-align: center;
   font-size: 25px;
-}
-
-.fa-times {
-  position: relative;
-  font-size: 20px;
-  margin: 0 10px;
-  float: right;
 }
 
 .loader {
