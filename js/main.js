@@ -6,14 +6,7 @@ var favoriteButton = document.querySelector('#favorite-button');
 var favoriteList = document.querySelector('.favorite-list');
 var allSections = document.querySelectorAll('section');
 var loading = document.querySelector('#loading-image');
-
-window.addEventListener('load', function () {
-  if (data.currentPokemon !== null) {
-    var open = generatePokemon(data.currentPokemon);
-    pokeSection.appendChild(open);
-  }
-  allSections.forEach(hideSection);
-});
+var route1 = document.querySelector('#route1-home');
 
 function capital(word) {
   if (typeof word !== 'string') {
@@ -237,6 +230,26 @@ function removeFav(event) {
   }
 }
 
+function homeButton(event) {
+  data.view = 'home-view';
+  allSections.forEach(hideSection);
+}
+
+window.addEventListener('load', function () {
+  allSections.forEach(hideSection);
+  var view = data.view;
+  if (view === 'selected') {
+    var open = generatePokemon(data.currentPokemon);
+    pokeSection.appendChild(open);
+  } else if (view === 'favorites') {
+    favList();
+  } else if (view === 'homne-view') {
+    allSections.forEach(hideSection);
+  }
+
+});
+
+route1.addEventListener('click', homeButton);
 favoriteList.addEventListener('click', removeFav);
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);

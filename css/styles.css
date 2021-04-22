@@ -2,6 +2,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+.nav-header {
+  display: flex;
+  align-items: center;
+}
+
 .hidden {
   display: none !important;
 }
@@ -121,6 +126,9 @@ form {
   font-size: 18px;
   border: 4px solid black;
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
 }
 
 ul {
@@ -130,6 +138,7 @@ ul {
 }
 
 .pokemon-description > p {
+  width: 100%;
   margin: 0;
   font-weight: bold;
   text-align: center;

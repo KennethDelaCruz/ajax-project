@@ -14,8 +14,8 @@
 </head>
 <body>
   <header>
-    <div class="column-full container">
-      <img  src="images/route1-title.png">
+    <div class="column-full container nav-header">
+      <img id="route1-home" src="images/route1-title.png">
     </div>
   </header>
   <main class="container">
@@ -30,7 +30,7 @@
       <ul class="favorite-list row">
       </ul>
     </section>
-    <div class="column-full search-buttons">
+    <div class="column-full search-buttons" data-view="home-view">
       <form id="search-pokemon">
         <input type="text" name="name" id="name" placeholder="Enter Pokémon name or ID..." required>
         <button class="form-button" id="name-button" type="submit">Submit</button>
