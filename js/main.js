@@ -20,12 +20,23 @@ function getPokeData(name) {
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    data.currentPokemon = xhr.response;
-    var pokemon = xhr.response;
-    data.pokesnap = data.currentPokemon.sprites.other['official-artwork'].front_default;
-    var newElement = generatePokemon(pokemon);
-    pokeSection.appendChild(newElement);
+    if (xhr.status === 404) {
+      data.view = 'bad-request';
+      allSections.forEach(hideSection);
+      loading.classList.add('hidden');
+    } else {
+      data.currentPokemon = xhr.response;
+      var pokemon = xhr.response;
+      data.pokesnap = data.currentPokemon.sprites.other['official-artwork'].front_default;
+      var newElement = generatePokemon(pokemon);
+      pokeSection.appendChild(newElement);
+      loading.classList.add('hidden');
+    }
+  });
+  xhr.addEventListener('error', function () {
+    data.view = 'error';
     loading.classList.add('hidden');
+    allSections.forEach(hideSection);
   });
   xhr.send();
 }

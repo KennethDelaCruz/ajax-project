@@ -5,6 +5,10 @@
   padding: 0 1.5rem;
 }
 
+.error-container {
+  max-width: 500px;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;
