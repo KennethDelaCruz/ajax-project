@@ -2,64 +2,63 @@
 var searchForm = document.querySelector('#search-pokemon');
 var pokeSection = document.querySelector('.pokemon-section');
 var randomButton = document.querySelector('#random-button');
-var heartButton = document.querySelector('.fa-heart');
 var favoriteButton = document.querySelector('#favorite-button');
-var favoriteList = document.querySelector('.favorite-list')
+var favoriteList = document.querySelector('.favorite-list');
 var allSections = document.querySelectorAll('section');
 var loading = document.querySelector('#loading-image');
+var route1 = document.querySelector('#route1-home');
 
-
-window.addEventListener('load',function(){
-  if(data.currentPokemon !== null){
-    var open = generatePokemon(data.currentPokemon);
-    pokeSection.appendChild(open);
-  }
-  allSections.forEach(hideSection);
-})
-
-
-function capital(word){
-  if (typeof word !== 'string'){
-    return
+function capital(word) {
+  if (typeof word !== 'string') {
+    return;
   }
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 
-
-
-function getPokeData(name){
+function getPokeData(name) {
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name);
   xhr.responseType = 'json';
-  xhr.addEventListener('load', function(){
-    data.currentPokemon = xhr.response
-    var pokemon = xhr.response;
-    data.pokesnap = data.currentPokemon.sprites.other["official-artwork"].front_default;
-    var newElement = generatePokemon(pokemon);
-    pokeSection.appendChild(newElement);
+  xhr.addEventListener('load', function () {
+    if (xhr.status === 404) {
+      data.view = 'bad-request';
+      allSections.forEach(hideSection);
+      loading.classList.add('hidden');
+    } else {
+      data.currentPokemon = xhr.response;
+      var pokemon = xhr.response;
+      data.pokesnap = data.currentPokemon.sprites.other['official-artwork'].front_default;
+      var newElement = generatePokemon(pokemon);
+      pokeSection.appendChild(newElement);
+      loading.classList.add('hidden');
+    }
+  });
+  xhr.addEventListener('error', function () {
+    data.view = 'error';
     loading.classList.add('hidden');
-  })
+    allSections.forEach(hideSection);
+  });
   xhr.send();
 }
 
-function getFavorites(name){
+function getFavorites(name) {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name)
+  xhr.open('GET', 'https://pokeapi.co/api/v2/pokemon/' + name);
   xhr.responseType = 'json';
-  xhr.addEventListener('load', function(){
+  xhr.addEventListener('load', function () {
     var pokemon = xhr.response;
     var newLi = generateFavorites(pokemon);
     favoriteList.appendChild(newLi);
-  })
+  });
   xhr.send();
-};
+}
 
 function submitForm() {
   event.preventDefault();
-  data.view = "selected";
+  data.view = 'selected';
   allSections.forEach(hideSection);
   var name = searchForm.name.value;
-  if(typeof name === 'string') {
+  if (typeof name === 'string') {
     name = name.toLowerCase();
   }
   loading.classList.remove('hidden');
@@ -68,14 +67,14 @@ function submitForm() {
   searchForm.reset();
 }
 
-function generatePokemon(object){
-  if (document.querySelector('#selected-pokemon') !== null){
+function generatePokemon(object) {
+  if (document.querySelector('#selected-pokemon') !== null) {
     document.querySelector('#selected-pokemon').remove();
   }
 
   var mainDiv = document.createElement('div');
   mainDiv.setAttribute('class', ' row');
-  mainDiv.setAttribute('id', 'selected-pokemon')
+  mainDiv.setAttribute('id', 'selected-pokemon');
 
   var div1 = document.createElement('div');
   div1.setAttribute('class', 'column-half poke-picture');
@@ -88,48 +87,57 @@ function generatePokemon(object){
   div2.setAttribute('class', 'column-half poke-text');
 
   var subDiv = document.createElement('div');
-  subDiv.setAttribute('class', 'pokemon-details')
+  subDiv.setAttribute('class', 'pokemon-details');
 
   var $name = document.createElement('h3');
   $name.setAttribute('class', 'pokemon-name');
   $name.textContent = capital(object.name);
 
-  var $heart = document.createElement('i')
-  if(data.favorites.includes(object.name )){
-    $heart.setAttribute('class', 'fas fa-heart')
+  var $heart = document.createElement('i');
+  if (data.favorites.includes(object.name)) {
+    $heart.setAttribute('class', 'fas fa-heart');
   } else {
     $heart.setAttribute('class', 'far fa-heart');
   }
   $heart.setAttribute('id', 'like');
 
   var $type = document.createElement('h4');
-  $type.textContent = 'Type: '+ capital(object.types[0].type.name);
+  $type.textContent = 'Type: ';
+  $type.setAttribute('class', 'type');
 
+  var $typeName = document.createElement('h4');
+  $typeName.textContent = capital(object.types[0].type.name);
+  $typeName.setAttribute('class', 'type-name');
 
   var $number = document.createElement('h4');
   $number.textContent = '#' + object.id;
+  $number.setAttribute('class', 'poke-id');
 
   var $weight = document.createElement('h4');
-  $weight.textContent = 'Weight: ' + Math.floor(object.weight * .1) + 'kg' ;
+  $weight.textContent = 'Weight: ';
+  $weight.setAttribute('class', 'poke-weight');
+
+  var $weightNumber = document.createElement('h4');
+  $weightNumber.textContent = Math.floor(object.weight * 0.1) + 'kg';
+  $weightNumber.setAttribute('class', 'weight-number');
 
   var abilityDiv = document.createElement('div');
-  abilityDiv.setAttribute('class', 'pokemon-description')
+  abilityDiv.setAttribute('class', 'pokemon-description');
 
   var $abilities = document.createElement('p');
   $abilities.textContent = 'Abilities';
 
   var $list = document.createElement('ul');
 
-
-
   var abilities = object.abilities;
-  for(var i = 0; i < abilities.length; i++){
+  for (var i = 0; i < abilities.length; i++) {
     var newLi = document.createElement('li');
-    newLi.textContent = capital(abilities[i]["ability"].name);
+    newLi.textContent = capital(abilities[i].ability.name);
     $list.appendChild(newLi);
   }
 
-
+  $weight.appendChild($weightNumber);
+  $type.appendChild($typeName);
   $name.appendChild($heart);
   subDiv.appendChild($name);
   subDiv.appendChild($type);
@@ -143,18 +151,19 @@ function generatePokemon(object){
   mainDiv.appendChild(div1);
   mainDiv.appendChild(div2);
 
-return mainDiv
+  return mainDiv;
 }
 
-function generateFavorites(object){
+function generateFavorites(object) {
   var $li = document.createElement('li');
-  $li.setAttribute('class', 'fav-list')
+  $li.setAttribute('class', 'fav-list');
 
   var $img = document.createElement('img');
-  $img.setAttribute('src', object.sprites.front_default)
+  $img.setAttribute('src', object.sprites.front_default);
 
   var $name = document.createElement('h3');
   $name.textContent = capital(object.name);
+  $name.setAttribute('class', 'favorite-name');
 
   var $number = document.createElement('h3');
   $number.textContent = '#' + object.id;
@@ -166,14 +175,11 @@ function generateFavorites(object){
   $li.appendChild($name);
   $li.appendChild($number);
   $li.appendChild($remove);
-  return $li
+  return $li;
 }
 
-//<i class="fas fa-times"></i>
-
-
-function random(event){
-  data.view = "selected";
+function random(event) {
+  data.view = 'selected';
   allSections.forEach(hideSection);
   var max = 898;
   var randomInteger = Math.floor(Math.random() * Math.floor(max));
@@ -182,61 +188,91 @@ function random(event){
   pokeSection.scrollIntoView({ behavior: 'smooth' });
 }
 
-function likeButton(event){
+function likeButton(event) {
 
-  if(event.target.id === 'like'){
+  if (event.target.id === 'like') {
     var $name = event.target.closest('h3').textContent.toLowerCase();
-    if(data.favorites.includes($name)){
-      event.target.setAttribute('class', 'far fa-heart')
-      var index = data.favorites.indexOf($name)
+    if (data.favorites.includes($name)) {
+      event.target.setAttribute('class', 'far fa-heart');
+      var index = data.favorites.indexOf($name);
       data.favorites.splice(index, 1);
     } else {
-    event.target.setAttribute('class', 'fas fa-heart')
-    data.favorites.push($name);
+      event.target.setAttribute('class', 'fas fa-heart');
+      data.favorites.push($name);
     }
   }
 }
 
-function favList(event){
-  data.view ='favorites'
+function favList(event) {
+  data.view = 'favorites';
   allSections.forEach(hideSection);
-  if(data.favorites.length !== 0){
-    document.querySelector('.fav-heading').textContent = 'Your Favorite Pokemon!'
-    var allListed = document.querySelectorAll('.fav-list')
-    for (var k = 0; k < allListed.length; k++){
+  if (data.favorites.length !== 0) {
+    document.querySelector('.fav-heading').textContent = 'Your Favorite Pokemon!';
+    var allListed = document.querySelectorAll('.fav-list');
+    for (var k = 0; k < allListed.length; k++) {
       allListed[k].remove();
     }
   } else {
-    document.querySelector('.fav-heading').textContent = 'The List is Currently Empty!';
+    document.querySelector('.fav-heading').textContent = 'Favorite Pokémon list is Currently Empty!';
   }
-  for(var i = 0; i < data.favorites.length; i++){
+  for (var i = 0; i < data.favorites.length; i++) {
     getFavorites(data.favorites[i]);
   }
-  favoriteList.scrollIntoView({behavior: 'smooth'});
+  favoriteList.scrollIntoView({ behavior: 'smooth' });
 }
 
-function hideSection(object){
+function hideSection(object) {
   var viewType = object.getAttribute('data-view');
-  if(viewType !== data.view){
+  if (viewType !== data.view) {
     object.classList.add('hidden');
   } else {
-    object.classList.remove('hidden')
+    object.classList.remove('hidden');
   }
 }
 
-function removeFav(event){
-  var closest = event.target.closest('li')
-  if(event.target.className === 'fas fa-times'){
+function removeFav(event) {
+  var closest = event.target.closest('li');
+  if (event.target.className === 'fas fa-times') {
     var $name = event.target.previousSibling.previousSibling.textContent.toLowerCase();
-    if(data.favorites.includes($name)){
+    if (data.favorites.includes($name)) {
       closest.remove();
       var index = data.favorites.indexOf($name);
-      data.favorites.splice(index,1);
+      data.favorites.splice(index, 1);
     }
   }
 }
 
-favoriteList.addEventListener('click', removeFav)
+function searchFav(event) {
+  if (event.target.className === 'favorite-name') {
+    var name = event.target.textContent.toLowerCase();
+    getPokeData(name.toLowerCase());
+    data.view = 'selected';
+    allSections.forEach(hideSection);
+  }
+}
+
+function homeButton(event) {
+  data.view = 'home-view';
+  allSections.forEach(hideSection);
+}
+
+window.addEventListener('load', function () {
+  allSections.forEach(hideSection);
+  var view = data.view;
+  if (view === 'selected') {
+    var open = generatePokemon(data.currentPokemon);
+    pokeSection.appendChild(open);
+  } else if (view === 'favorites') {
+    favList();
+  } else if (view === 'homne-view') {
+    allSections.forEach(hideSection);
+  }
+
+});
+
+route1.addEventListener('click', homeButton);
+favoriteList.addEventListener('click', removeFav);
+favoriteList.addEventListener('click', searchFav);
 favoriteButton.addEventListener('click', favList);
 pokeSection.addEventListener('click', likeButton);
 randomButton.addEventListener('click', random);

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AJAX Project</title>
+  <title>Route 1</title>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
@@ -14,28 +14,36 @@
 </head>
 <body>
   <header>
-    <div class="column-full container">
-      <img  src="images/route1-title.png">
+    <div class="column-full container nav-header">
+      <img id="route1-home" src="images/route1-title.png">
     </div>
   </header>
   <main class="container">
     <div class="loader">
       <img class="hidden" id="loading-image" src="images/pikachu-loading.gif" alt="loading...">
     </div>
+    <section class="error-container" data-view="error">
+      <p class="error-message">Looks like something unexpected happened...</p>
+      <p class="error-button">Please retry request</p>
+    </section>
+    <section class="error-container" data-view="bad-request">
+            <p class="error-message">The pokemon does not exist..</p>
+            <p class="error-button">Please retry request</p>
+    </section>
     <section class="row pokemon-section" data-view="selected">
 
     </section>
     <section class="column-full favorite-box" data-view="favorites">
-      <h3 class="fav-heading">The List is Currently Empty!</h3>
+      <h3 class="fav-heading">Favorite Pokémon list is Currently Empty!</h3>
       <ul class="favorite-list row">
       </ul>
     </section>
-    <div class="column-full search-buttons">
+    <div class="column-full search-buttons" data-view="home-view">
       <form id="search-pokemon">
-        <input type="text" name="name" id="name" required><br />
-        <button class="button" id="name-button" type="submit">Find Pokemon by Name/ID</button>
+        <input type="text" name="name" id="name" placeholder="Enter Pokémon name or ID..." required>
+        <button class="form-button" id="name-button" type="submit">Submit</button>
        </form>
-       <button class="button" id="random-button">Search Random Pokemon</button>
+       <button class="button" id="random-button">Search Random Pokémon</button>
        <button class="button" id="favorite-button">View Favorites</button>
       </div>
   </main>
