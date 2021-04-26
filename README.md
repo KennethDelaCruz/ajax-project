@@ -1,8 +1,8 @@
 # Route 1
 
-An application that lets the user find more information on their favorite pokemon!
-It will also let the users find a random pokemon and add any pokemon to a list of favorites.
-It pulls pokemon information from https://pokeapi.co/ and uses HTML5, CSS3 and JavaScript.
+An application that lets the user find more information on their favorite Pokémon!
+It will also let the users find a random Pokémon and add any Pokémon to a list of favorites.
+It pulls Pokémon information from https://pokeapi.co/ and uses HTML5, CSS3 and JavaScript.
 
 ## Features
 
